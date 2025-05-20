@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="/static/images/icons8-medical-50.png" type="">
+
+    <title>Lumber Disease Classification</title>
+
+    <!-- Bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
+
+    <!-- Fonts style -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome style -->
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/style.css" rel="stylesheet" />
+    <!-- Responsive style -->
+    <link href="/static/css/responsive.css" rel="stylesheet" />
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            width: 100%; /* Set width to full viewport width */
+            height: 100%;
+            margin: 0;
+            background-image: url('/static/images/philip-myrtorp-46Y946UVyfw-unsplash.jpg'); /* Add the path to your background image here */
+            background-size: cover; /* Ensures the image covers the entire background */
+            background-position: center; /* Centers the image */
+            background-repeat: no-repeat; /* Prevents repeating the image */
+        }
+
+        .hero_area {
+            background: linear-gradient(to right, #fff, #fff);
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header_section {
+            padding: 10px 0;
+        }
+
+        .navbar-brand img {
+            max-height: 50px;
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 16px;
+            color: #fff;
+            padding: 10px 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        .inner_page {
+            background: #fff;
+            padding: 40px 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .inner_page h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group label {
+            font-weight: 500;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+
+        .btn-primary {
+            background-color: #18cfc0;
+            border-color: #18cfc0;
+            border-radius: 5px;
+            font-size: 16px;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #c6cacf;
+            border-color: #18cfc0;
+        }
+    </style>
+</head>
+
+<body class="sub_page">
+
+    <div class="hero_area">
+        <!-- Header section starts -->
+        <header class="header_section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="navbar navbar-expand-lg custom_nav-container">
+                            <a class="navbar-brand" href="#" >
+                                <img src="/static/images/icons8-medical-50.png" alt="DICOM Prediction Logo" width="50" height="50">
+                                Lumbar Disease Classification
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="{{ url_for('home') }}">Home </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ url_for('prediction') }}">Prediction <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ url_for('index') }}">Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Header section ends -->
+
+    </div>
+  
+    <section class="inner_page" style="margin-top: 50px; background-color: rgba(255, 255, 255, 0);">
+        <div class="container">
+            <h2 style="text-align: center; color: #18cfc0;">Make Your Prediction</h2> <!-- Centered Heading -->
+        
+            <div id="forecast-results" class="container" style="text-align: center;">
+                {% if predicted_class %}
+                    <ul class="alert alert-info" role="alert" style="display: inline-block; text-align: left;">
+                        <li>Prediction: {{ predicted_class }}</li>
+                    </ul>
+                {% endif %}
+                {% if image_path %}
+                    <div style="margin-top: 20px;">
+                        <img src="{{ image_path }}" height="200px" width="300px" alt="Uploaded Image">
+                    </div>
+                {% endif %}
+            </div><br>
+        
+            <!-- Form for Image Upload and Prediction -->
+            <center><div style="text-align: center; margin-left: 150px;"> <!-- Center the Form -->
+                <form id="prediction-form" actihon="{{ url_for('prediction') }}" method="post" enctype="multipart/form-data" style="display: inline-block; text-align: left;">
+                    <div class="form-group">
+                        <label for="file" style="color: #18cfc0;">Upload a DICOM Image</label>
+                        <input type="file" id="file" name="file" class="form-control-file" accept=".dcm" required style="color: #18cfc0;">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div></center>
+        </div>
+    </section>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
