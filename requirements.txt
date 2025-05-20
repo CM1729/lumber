@@ -19,7 +19,6 @@ clang==5.0
 click==8.0.4
 colorama==0.4.5
 cycler==0.11.0
-dataclasses==0.8
 decorator==4.4.2
 defusedxml==0.7.1
 entrypoints==0.4
