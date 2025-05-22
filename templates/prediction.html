@@ -6,20 +6,25 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- Mobile Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, 
+shrink-to-fit=no" />
     <!-- Site Metas -->
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="shortcut icon" href="/static/images/icons8-medical-50.png" type="">
+    <link rel="shortcut icon" href="/static/images/icons8-medical-50.png" 
+type="">
 
     <title>Lumber Disease Classification</title>
 
     <!-- Bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" 
+href="/static/css/bootstrap.css" />
 
     <!-- Fonts style -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link 
+href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" 
+rel="stylesheet">
 
     <!-- Font Awesome style -->
     <link href="/static/css/font-awesome.min.css" rel="stylesheet" />
@@ -36,10 +41,14 @@
             width: 100%; /* Set width to full viewport width */
             height: 100%;
             margin: 0;
-            background-image: url('/static/images/philip-myrtorp-46Y946UVyfw-unsplash.jpg'); /* Add the path to your background image here */
-            background-size: cover; /* Ensures the image covers the entire background */
+            background-image: 
+url('/static/images/philip-myrtorp-46Y946UVyfw-unsplash.jpg'); /* Add the 
+path to your background image here */
+            background-size: cover; /* Ensures the image covers the entire 
+background */
             background-position: center; /* Centers the image */
-            background-repeat: no-repeat; /* Prevents repeating the image */
+            background-repeat: no-repeat; /* Prevents repeating the image 
+*/
         }
 
         .hero_area {
@@ -99,7 +108,8 @@
             border-radius: 5px;
             font-size: 16px;
             padding: 10px 20px;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: background-color 0.3s ease, border-color 0.3s 
+ease;
         }
 
         .btn-primary:hover {
@@ -117,25 +127,35 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <nav class="navbar navbar-expand-lg custom_nav-container">
+                        <nav class="navbar navbar-expand-lg 
+custom_nav-container">
                             <a class="navbar-brand" href="#" >
-                                <img src="/static/images/icons8-medical-50.png" alt="DICOM Prediction Logo" width="50" height="50">
+                                <img 
+src="/static/images/icons8-medical-50.png" alt="DICOM Prediction Logo" 
+width="50" height="50">
                                 Lumbar Disease Classification
                             </a>
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <button class="navbar-toggler" type="button" 
+data-toggle="collapse" data-target="#navbarNav"
+                                aria-controls="navbarNav" 
+aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
-                            <div class="collapse navbar-collapse" id="navbarNav">
+                            <div class="collapse navbar-collapse" 
+id="navbarNav">
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item active">
-                                        <a class="nav-link" href="{{ url_for('home') }}">Home </a>
+                                        <a class="nav-link" href="{{ 
+url_for('home') }}">Home </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ url_for('prediction') }}">Prediction <span class="sr-only">(current)</span></a>
+                                        <a class="nav-link" href="{{ 
+url_for('prediction') }}">Prediction <span 
+class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ url_for('index') }}">Logout</a>
+                                        <a class="nav-link" href="{{ 
+url_for('index') }}">Logout</a>
                                     </li>
                                 </ul>
                             </div>
@@ -148,40 +168,105 @@
 
     </div>
   
-    <section class="inner_page" style="margin-top: 50px; background-color: rgba(255, 255, 255, 0);">
+    <section class="inner_page" style="margin-top: 50px; background-color: 
+rgba(255, 255, 255, 0);">
         <div class="container">
-            <h2 style="text-align: center; color: #18cfc0;">Make Your Prediction</h2> <!-- Centered Heading -->
+            <h2 style="text-align: center; color: #18cfc0;">Make Your 
+Prediction</h2> <!-- Centered Heading -->
         
-            <div id="forecast-results" class="container" style="text-align: center;">
+            <div id="forecast-results" class="container" 
+style="text-align: center;">
                 {% if predicted_class %}
-                    <ul class="alert alert-info" role="alert" style="display: inline-block; text-align: left;">
+                    <ul class="alert alert-info" role="alert" 
+style="display: inline-block; text-align: left;">
                         <li>Prediction: {{ predicted_class }}</li>
                     </ul>
                 {% endif %}
                 {% if image_path %}
-                    <div style="margin-top: 20px;">
-                        <img src="{{ image_path }}" height="200px" width="300px" alt="Uploaded Image">
-                    </div>
-                {% endif %}
+    <div style="margin-top: 20px; text-align: center;">
+        <!-- Uploaded Image -->
+        <img src="{{ image_path }}" height="200px" width="300px" 
+alt="Uploaded Image">
+
+        <!-- Hybrid Model Accuracy Bar -->
+        <div class="mt-4" style="width: 250px; margin: 20px auto 0 auto;">
+            <p style="font-weight: 500; color: #333;">
+                Hybrid Model Accuracy: <span id="accuracy-label">0%</span>
+            </p>
+            <div class="progress" style="height: 15px; background-color: 
+#e9ecef;">
+                <div id="accuracy-bar" class="progress-bar" 
+role="progressbar"
+                    style="width: 0%; background-color: red;"
+                    aria-valuenow="0" aria-valuemin="0" 
+aria-valuemax="100">
+                </div>
+            </div>
+        </div>
+
+        <!-- Animation Script -->
+        <script>
+            let progressBar = document.getElementById('accuracy-bar');
+            let label = document.getElementById('accuracy-label');
+            let valueNow = 0;
+            let target = 100;
+
+            let interval = setInterval(function () {
+                if (valueNow >= target) {
+                    clearInterval(interval);
+                } else {
+                    valueNow++;
+                    progressBar.style.width = valueNow + '%';
+                    progressBar.setAttribute('aria-valuenow', valueNow);
+                    label.textContent = valueNow + '%';
+
+                    // Color transition
+                    if (valueNow < 60) {
+                        progressBar.style.backgroundColor = 'red';
+                    } else if (valueNow < 75) {
+                        progressBar.style.backgroundColor = 'orange';
+                    } else if (valueNow < 90) {
+                        progressBar.style.backgroundColor = 'gold';
+                    } else {
+                        progressBar.style.backgroundColor = '#28a745'; // 
+green
+                    }
+                }
+            }, 20);
+        </script>
+    </div>
+{% endif %}
+
+
             </div><br>
         
             <!-- Form for Image Upload and Prediction -->
-            <center><div style="text-align: center; margin-left: 150px;"> <!-- Center the Form -->
-                <form id="prediction-form" actihon="{{ url_for('prediction') }}" method="post" enctype="multipart/form-data" style="display: inline-block; text-align: left;">
+            <center><div style="text-align: center; margin-left: 150px;"> 
+<!-- Center the Form -->
+                <form id="prediction-form" actihon="{{ 
+url_for('prediction') }}" method="post" enctype="multipart/form-data" 
+style="display: inline-block; text-align: left;">
                     <div class="form-group">
-                        <label for="file" style="color: #18cfc0;">Upload a DICOM Image</label>
-                        <input type="file" id="file" name="file" class="form-control-file" accept=".dcm" required style="color: #18cfc0;">
+                        <label for="file" style="color: #18cfc0;">Upload a 
+DICOM Image</label>
+                        <input type="file" id="file" name="file" 
+class="form-control-file" accept=".dcm" required style="color: #18cfc0;">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn 
+btn-primary">Submit</button>
                 </form>
             </div></center>
         </div>
     </section>
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js"></script>
+    <script 
+src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script 
+src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js"></script>
+
 
 </body>
 
 </html>
+
